@@ -1,0 +1,21 @@
+syntax = "proto3";
+option go_package = "grpc/name";
+package  grpc.name;
+message NameRequest {
+  string service_name = 1;
+  repeated string address = 2;
+}
+message NameResponse{
+  string service_name = 1;
+  repeated string address = 2;
+}
+service  Name {
+  // 注册
+  rpc Register(NameRequest) returns (NameResponse) {}
+  // 删除
+  rpc Delete(NameRequest) returns (NameResponse) {}
+  // 保活
+  rpc Keepalive(stream NameRequest) returns (NameResponse){}
+  // 获取
+  rpc GetAddress (NameRequest) returns(NameResponse){}
+}
